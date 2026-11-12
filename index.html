@@ -28,7 +28,7 @@
   --body: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
   --mono: "Instrument Sans", "Helvetica Neue", Arial, sans-serif; /* small labels: same family as the body */
   --gutter: clamp(18px, 4vw, 48px);
-  --max: 1160px;
+  --max: 1400px;
   --ease: cubic-bezier(.2, .7, .2, 1);
   color-scheme: light;
 }
@@ -130,16 +130,18 @@ section, .project { scroll-margin-top: 84px; }
 .plate.cut { display: grid; place-items: center; padding: clamp(16px, 2.6vw, 34px); }
 .plate.cut img { min-width: 0; min-height: 0; object-fit: contain; filter: drop-shadow(0 14px 16px rgba(12, 16, 20, .18)); }
 .plate.cut:hover img { transform: translateY(-6px); }
-.grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.grid2 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
 .grid2 .tag { position: absolute; left: 12px; top: 10px; }
 .grid2 .plate { position: relative; }
 .grid2 .plate.cut { padding: clamp(14px, 2vw, 24px); padding-top: clamp(28px, 3vw, 36px); }
 /* On roomy screens the pictures stay in view while the text beside them scrolls. */
 @media (min-width: 861px) and (min-height: 820px) {
-  .project:not(#pickledock) .media { align-self: start; position: sticky; top: 92px; }
+  .project:not(#pickledock):not(#sand-cast) .media { align-self: start; position: sticky; top: 92px; }
 }
 .r45 { aspect-ratio: 4 / 5; }
+@media (min-width: 1200px) { .r45.lead { aspect-ratio: 1 / 1; } }
 .r34 { aspect-ratio: 3 / 4; }
+.r57 { aspect-ratio: 5 / 7; }
 .r43 { aspect-ratio: 4 / 3; }
 .r11 { aspect-ratio: 1 / 1; }
 .pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
@@ -230,6 +232,7 @@ figcaption { font-family: var(--mono); font-size: 13.5px; line-height: 1.5; colo
   .project .media, .project.flip .media { order: 2; margin: 4px 0 28px; }
   .project .full { order: 4; margin-top: 36px; }
   .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .wip .text, .wip .media { grid-column: 1 / -1; }
   .wip .media { max-width: 420px; }
   .two { grid-template-columns: minmax(0, 1fr); }
@@ -303,7 +306,7 @@ figcaption { font-family: var(--mono); font-size: 13.5px; line-height: 1.5; colo
         </div>
         <div class="media">
           <figure>
-            <div class="plate wipe r45"><img src="img/pickledock-mounted.jpg" alt="A blue PickleDock holding a yellow pickleball, clamped to the frame of a sports wheelchair beside a court" width="1100" height="1375"></div>
+            <div class="plate wipe r45 lead"><img src="img/pickledock-mounted.jpg" alt="A blue PickleDock holding a yellow pickleball, clamped to the frame of a sports wheelchair beside a court" width="1100" height="1375"></div>
             <figcaption>PickleDock on a sports wheelchair at the October 2026 test session.</figcaption>
           </figure>
           <div class="pair stagger" style="margin-top:12px">
@@ -388,26 +391,39 @@ figcaption { font-family: var(--mono); font-size: 13.5px; line-height: 1.5; colo
           </div>
           <ol class="howto stagger">
             <li class="rv">Designed the relief in CAD</li>
-            <li class="rv">Used the design to form a mold in packed sand</li>
+            <li class="rv">3D printed the design as a pattern and brushed on a release coat so the sand would not stick</li>
+            <li class="rv">Packed sand around the pattern to form the mold</li>
             <li class="rv">Poured molten aluminum into the mold</li>
             <li class="rv">Sanded and finished the casting by hand</li>
           </ol>
           <dl class="titleblock stagger">
-            <div class="rv"><dt>Year</dt><dd>2025/26 school year</dd></div>
+            <div class="rv"><dt>When</dt><dd>February 2026</dd></div>
             <div class="rv"><dt>Class</dt><dd>Design to Entrepreneurship</dd></div>
-            <div class="rv"><dt>Process</dt><dd>CAD, sand casting, hand finishing</dd></div>
+            <div class="rv"><dt>Process</dt><dd>CAD, 3D printing, sand casting, hand finishing</dd></div>
             <div class="rv"><dt>Prototyping</dt><dd>Problem solving in the CAD design</dd></div>
             <div class="rv"><dt>Material</dt><dd>Aluminum</dd></div>
           </dl>
         </div>
         <div class="media">
+          <div class="pair stagger">
+            <figure>
+              <div class="plate wipe r57"><img src="img/cast-pattern.jpg" alt="Soroush brushing a coating onto the blue 3D-printed pattern of the beach scene" width="1000" height="1400" loading="lazy"></div>
+              <figcaption>Brushing a release coat onto the 3D-printed pattern.</figcaption>
+            </figure>
+            <figure>
+              <div class="plate wipe r57"><img src="img/cast-pour.jpg" alt="A glowing crucible pouring molten aluminum into sand molds in wooden frames" width="1000" height="1400" loading="lazy"></div>
+              <figcaption>Pouring the molten aluminum into the sand molds.</figcaption>
+            </figure>
+          </div>
+        </div>
+        <div class="full">
           <div class="grid2 stagger">
             <div class="plate wipe cut r43"><span class="label tag">CAD</span><img src="img/cast-cad-top.webp" alt="Top view of the CAD model: a beach scene with a palm tree, two clouds, a shoreline, two towels, and a beach ball" width="915" height="687" loading="lazy"></div>
-            <div class="plate wipe cut r43"><span class="label tag">Aluminum</span><img src="img/cast-top-cut.webp" alt="Top view of the finished aluminum plaque showing the same beach scene" width="711" height="530" loading="lazy"></div>
             <div class="plate wipe cut r43"><img src="img/cast-cad-angle.webp" alt="Angled view of the CAD model showing the shapes raised off a flat plate" width="922" height="484" loading="lazy"></div>
+            <div class="plate wipe cut r43"><span class="label tag">Aluminum</span><img src="img/cast-top-cut.webp" alt="Top view of the finished aluminum plaque showing the same beach scene" width="711" height="530" loading="lazy"></div>
             <div class="plate wipe cut r43"><img src="img/cast-angle-cut.webp" alt="The aluminum plaque seen from a low angle" width="916" height="510" loading="lazy"></div>
           </div>
-          <figcaption>The design on the left, the metal on the right. The casting still shows the grain of the sand it was poured into.</figcaption>
+          <figcaption>The CAD model, then the finished casting. The metal still shows the grain of the sand it was poured into.</figcaption>
         </div>
       </article>
 
@@ -430,7 +446,7 @@ figcaption { font-family: var(--mono); font-size: 13.5px; line-height: 1.5; colo
         </div>
         <div class="media">
           <figure>
-            <div class="plate wipe cut r11"><img src="img/balloon-cut.webp" alt="An Arduino wired to a breadboard, an accelerometer board, and a temperature probe" width="864" height="1200" loading="lazy"></div>
+            <div class="plate wipe cut r43"><img src="img/balloon-cut.webp" alt="An Arduino wired to a breadboard, an accelerometer board, and a temperature probe" width="864" height="1200" loading="lazy"></div>
             <figcaption>Arduino, breadboard, accelerometer, and temperature probe.</figcaption>
           </figure>
         </div>
@@ -477,7 +493,7 @@ figcaption { font-family: var(--mono); font-size: 13.5px; line-height: 1.5; colo
         </div>
         <div class="rv" style="--d:100ms">
           <p class="kicker">Research I co-authored</p>
-          <p style="margin-top:14px">Four peer-reviewed papers, written with researchers at Shahid Beheshti University of Medical Sciences and the University of Louisville. Two of them:</p>
+          <p style="margin-top:14px">Four peer-reviewed papers, written with researchers at the University of Louisville. Two of them:</p>
           <ul class="cites">
             <li><a href="https://doi.org/10.1007/s10103-025-04559-9">In vitro photobiomodulation enhances human adipose-derived stem cell viability and exosome quality</a><span class="j">Lasers in Medical Science, 2025</span></li>
             <li><a href="https://doi.org/10.1007/s00238-025-02384-5">Targeting oxidative stress in diabetic wound repair: combined photobiomodulation and adipose-derived stem cell therapy</a><span class="j">European Journal of Plastic Surgery, 2026</span></li>
