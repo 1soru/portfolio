@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Soroush Bayat Portfolio</title>
+<meta name="description" content="Portfolio of Soroush Bayat: PickleDock, a paddle ball holder, an aluminum sand cast, weather balloon sensors, and more.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wdth,wght@75..100,400..700&display=swap" rel="stylesheet">
+<script>
+  // Turn on motion only where it can run and the viewer has not asked for less of it.
+  if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.classList.add('js');
+  }
+</script>
+<style>
+/* Layout idea: a bright drawing sheet. White page, thin rules, one column of work,
+   and a small "title block" of facts beside each project. Single light theme by choice. */
+:root {
+  --paper: #FFFFFF;
+  --ink: #0C1014;
+  --muted: #5F6B78;
+  --rule: #E2E6EA;
+  --accent: #1E54F0;
+  --plate: #F2F4F7;
+  --display: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  --body: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono: "Instrument Sans", "Helvetica Neue", Arial, sans-serif; /* small labels: same family as the body */
+  --gutter: clamp(18px, 4vw, 48px);
+  --max: 1160px;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; animation: none !important; } }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--accent); color: #fff; }
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-decoration-color: var(--rule); text-underline-offset: 3px; text-decoration-thickness: 1px; transition: color .15s, text-decoration-color .15s; }
+a:hover { color: var(--accent); text-decoration-color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+p { margin: 0; }
+h1, h2, h3, h4 { margin: 0; font-family: var(--display); text-wrap: balance; }
+figure { margin: 0; }
+
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+.label {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Top bar */
+.top { position: sticky; top: 0; z-index: 20; background: rgba(255, 255, 255, .86); -webkit-backdrop-filter: saturate(1.4) blur(14px); backdrop-filter: saturate(1.4) blur(14px); border-bottom: 1px solid var(--rule); }
+.top .wrap { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 24px; padding-top: 16px; padding-bottom: 16px; }
+.top .mark { font-weight: 600; text-decoration: none; letter-spacing: -.01em; }
+.top nav { display: flex; flex-wrap: wrap; gap: 4px 26px; }
+.top nav a { position: relative; font-size: 15px; font-weight: 500; color: var(--muted); text-decoration: none; padding: 2px 0; }
+.top nav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -3px; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .35s var(--ease); }
+.top nav a:hover, .top nav a.on { color: var(--ink); }
+.top nav a.on::after { transform: scaleX(1); }
+
+/* Hero and about */
+.hero { padding: clamp(44px, 8vw, 104px) 0 clamp(56px, 9vw, 120px); }
+.hero h1 {
+  font-size: clamp(52px, 11.5vw, 148px);
+  font-weight: 600;
+  font-stretch: 78%;
+  line-height: 1;
+  letter-spacing: -.035em;
+}
+.hero h1 .word { display: inline-block; white-space: nowrap; overflow: hidden; padding: 0 .04em .16em 0; margin-bottom: -.16em; vertical-align: top; }
+.hero h1 .ch { display: inline-block; }
+.about { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 28px clamp(28px, 4vw, 52px); align-items: center; margin-top: clamp(28px, 4vw, 44px); }
+.portrait { width: clamp(132px, 17vw, 208px); aspect-ratio: 1; border-radius: 50%; overflow: hidden; background: var(--plate); }
+.portrait img { width: 100%; height: 100%; object-fit: cover; }
+.about .lede { font-size: clamp(20px, 2.3vw, 27px); line-height: 1.4; letter-spacing: -.012em; max-width: 30em; }
+.about .more { margin-top: 14px; color: var(--muted); font-size: 18px; max-width: 34em; }
+
+/* Section heads */
+.section-head { position: relative; padding-top: 18px; margin-bottom: clamp(32px, 5vw, 56px); }
+.section-head::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--ink); transform-origin: left; }
+.section-head h2 { font-size: clamp(24px, 3vw, 34px); font-weight: 600; font-stretch: 86%; letter-spacing: -.02em; line-height: 1.1; }
+section, .project { scroll-margin-top: 84px; }
+.block { margin-bottom: clamp(64px, 10vw, 128px); }
+
+/* Project */
+.project { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 32px clamp(24px, 4vw, 56px); padding-bottom: clamp(56px, 8vw, 104px); margin-bottom: clamp(56px, 8vw, 104px); border-bottom: 1px solid var(--rule); }
+.project:last-child { border-bottom: 0; margin-bottom: 0; padding-bottom: 0; }
+.project .text { grid-column: 1 / span 5; }
+.project .media { grid-column: 6 / span 7; }
+.project.flip .text { grid-column: 8 / span 5; order: 2; }
+.project.flip .media { grid-column: 1 / span 7; order: 1; }
+.project .full { grid-column: 1 / -1; order: 3; border-top: 1px solid var(--rule); padding-top: 28px; }
+.project h3 { font-size: clamp(34px, 4.6vw, 56px); font-weight: 600; font-stretch: 84%; line-height: 1; letter-spacing: -.028em; margin: 0 0 18px; }
+.project .summary { font-size: 20px; line-height: 1.45; letter-spacing: -.005em; margin-bottom: 20px; }
+.project .text p + p { margin-top: 14px; }
+.project .body { max-width: 36em; }
+.project .body p { color: #2A3138; }
+
+/* Title block */
+.titleblock { margin: 28px 0 0; border-top: 1px solid var(--rule); }
+.titleblock div { display: grid; grid-template-columns: 7.5em minmax(0, 1fr); gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--rule); align-items: baseline; }
+.titleblock dt { font-family: var(--mono); font-size: 11.5px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); }
+.titleblock dd { margin: 0; font-size: 15px; line-height: 1.45; }
+.links { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 22px; font-size: 15px; font-weight: 500; }
+.links a { text-decoration-color: var(--ink); }
+.links a::after { content: "\2197"; display: inline-block; margin-left: 5px; color: var(--accent); transition: transform .25s var(--ease); }
+.links a:hover::after { transform: translate(2px, -2px); }
+
+/* Media */
+.plate { background: var(--plate); overflow: hidden; }
+.plate img { width: 100%; height: 100%; object-fit: cover; transition: transform .9s var(--ease); }
+.plate:hover img { transform: scale(1.035); }
+/* Cutouts: the object floats on the plate with a soft shadow. */
+.plate.cut { display: grid; place-items: center; padding: clamp(16px, 2.6vw, 34px); }
+.plate.cut img { min-width: 0; min-height: 0; object-fit: contain; filter: drop-shadow(0 14px 16px rgba(12, 16, 20, .18)); }
+.plate.cut:hover img { transform: translateY(-6px); }
+.grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.grid2 .tag { position: absolute; left: 12px; top: 10px; }
+.grid2 .plate { position: relative; }
+.grid2 .plate.cut { padding: clamp(14px, 2vw, 24px); padding-top: clamp(28px, 3vw, 36px); }
+/* On roomy screens the pictures stay in view while the text beside them scrolls. */
+@media (min-width: 861px) and (min-height: 820px) {
+  .project:not(#pickledock) .media { align-self: start; position: sticky; top: 92px; }
+}
+.r45 { aspect-ratio: 4 / 5; }
+.r34 { aspect-ratio: 3 / 4; }
+.r43 { aspect-ratio: 4 / 3; }
+.r11 { aspect-ratio: 1 / 1; }
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.stack { display: grid; gap: 12px; }
+figcaption { font-family: var(--mono); font-size: 13.5px; line-height: 1.5; color: var(--muted); margin-top: 10px; }
+
+/* Process strip */
+.steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px 20px; margin-top: 8px; }
+.steps .when { font-family: var(--mono); font-size: 11.5px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--accent); margin: 14px 0 4px; }
+.steps h4 { margin: 0 0 6px; font-size: 17px; font-weight: 600; letter-spacing: -.01em; }
+.steps p { font-size: 15px; line-height: 1.5; color: var(--muted); }
+
+.howto { margin: 18px 0 0; padding: 0; list-style: none; counter-reset: s; }
+.howto li { counter-increment: s; display: grid; grid-template-columns: 2.4em minmax(0, 1fr); padding: 8px 0; border-bottom: 1px solid var(--rule); font-size: 16px; }
+.howto li:first-child { border-top: 1px solid var(--rule); }
+.howto li::before { content: counter(s, decimal-leading-zero); font-family: var(--mono); font-size: 12px; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--accent); padding-top: 3px; }
+
+/* In progress */
+.wip { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 32px clamp(24px, 4vw, 56px); align-items: start; }
+.wip .text { grid-column: 1 / span 6; }
+.wip .media { grid-column: 8 / span 5; }
+.wip-title { display: flex; align-items: center; gap: 20px; margin: 14px 0 18px; }
+.wip-title img { width: 84px; height: auto; flex: none; }
+.wip h3 { font-size: clamp(30px, 4vw, 46px); font-weight: 600; font-stretch: 84%; line-height: 1.02; letter-spacing: -.025em; }
+.wip .text p { max-width: 36em; }
+.wip .text p + p { margin-top: 14px; }
+.status { display: inline-flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--accent); }
+.status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: pulse 2.2s ease-out infinite; }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(30, 84, 240, .45); } 70%, 100% { box-shadow: 0 0 0 9px rgba(30, 84, 240, 0); } }
+.shot img { width: 100%; filter: drop-shadow(0 18px 26px rgba(12, 16, 20, .16)); }
+
+/* Small plain-language headings */
+.kicker { font-size: 16px; font-weight: 600; letter-spacing: -.005em; color: var(--accent); }
+
+/* Beyond class */
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px clamp(32px, 6vw, 88px); }
+.two h3 { font-size: 26px; font-weight: 600; letter-spacing: -.018em; line-height: 1.15; margin: 8px 0 12px; }
+.two p { max-width: 34em; }
+.two p + p { margin-top: 12px; }
+.book { display: grid; grid-template-columns: 132px minmax(0, 1fr); gap: 24px; align-items: start; margin-top: 14px; }
+.book img { border: 1px solid var(--rule); box-shadow: 0 16px 30px -20px rgba(12, 16, 20, .4); transition: transform .5s var(--ease); }
+.book img:hover { transform: translateY(-4px) rotate(-1.5deg); }
+.book h3 { margin-top: 0; }
+.note { color: var(--muted); font-size: 15px; }
+.cites { margin: 18px 0 0; padding: 0; list-style: none; }
+.cites li { padding: 12px 0; border-top: 1px solid var(--rule); font-size: 15px; line-height: 1.5; }
+.cites li:last-child { border-bottom: 1px solid var(--rule); }
+.cites .j { display: block; font-family: var(--mono); font-size: 13.5px; color: var(--muted); margin-top: 4px; }
+.also { margin-top: clamp(40px, 6vw, 64px); }
+.roles { margin: 14px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--rule); }
+.roles li { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--rule); font-size: 17px; align-items: baseline; }
+.roles span:last-child { color: var(--muted); font-size: 15px; }
+
+/* Contact */
+.contact { border-top: 2px solid var(--ink); padding: clamp(40px, 7vw, 88px) 0 clamp(40px, 6vw, 72px); }
+.contact .big { display: inline-block; font-size: clamp(26px, 5.2vw, 64px); font-weight: 600; font-stretch: 80%; letter-spacing: -.03em; line-height: 1.05; margin: 14px 0 0; text-decoration: none; background: linear-gradient(var(--accent), var(--accent)) left bottom / 0 3px no-repeat; padding-bottom: 6px; transition: background-size .5s var(--ease), color .2s; overflow-wrap: anywhere; }
+.contact .big:hover { background-size: 100% 3px; }
+
+/* Motion. Everything is visible without it; the js class only exists when motion can run. */
+@keyframes rise { from { transform: translateY(110%); } to { transform: none; } }
+@keyframes fadeup { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+@keyframes pop { from { opacity: 0; transform: scale(.86); } to { opacity: 1; transform: none; } }
+.js .hero h1 .ch { animation: rise .9s var(--ease) both; animation-delay: calc(var(--i) * 38ms + 80ms); }
+.js .portrait { animation: pop .8s var(--ease) .55s both; }
+.js .about .lede { animation: fadeup .8s var(--ease) .68s both; }
+.js .about .more { animation: fadeup .8s var(--ease) .8s both; }
+.js .top { animation: fadeup .6s var(--ease) both; }
+
+.js .rv { opacity: 0; transform: translateY(20px); transition: opacity .8s var(--ease), transform .8s var(--ease); transition-delay: var(--d, 0ms); }
+.js .rv.in { opacity: 1; transform: none; }
+.js .wipe img { clip-path: inset(0 0 100% 0); transform: scale(1.14); transition: clip-path 1s cubic-bezier(.65, 0, .2, 1), transform 1.5s var(--ease); transition-delay: var(--d, 0ms); }
+.js .wipe.in img { clip-path: inset(0); transform: none; }
+.js .wipe.in:hover img { transform: scale(1.035); transition-delay: 0ms; transition-duration: .9s; }
+.js .wipe.cut img { clip-path: none; opacity: 0; transform: translateY(28px) scale(.93); transition: opacity .9s var(--ease), transform 1.1s var(--ease); transition-delay: var(--d, 0ms); }
+.js .wipe.cut.in img { opacity: 1; transform: none; }
+.js .wipe.cut.in:hover img { transform: translateY(-6px); transition-delay: 0ms; transition-duration: .5s; }
+.js .section-head::before { transform: scaleX(0); transition: transform 1.1s cubic-bezier(.65, 0, .2, 1); }
+.js .section-head.in::before { transform: scaleX(1); }
+.js .section-head h2 { opacity: 0; transform: translateY(12px); transition: opacity .7s var(--ease) .25s, transform .7s var(--ease) .25s; }
+.js .section-head.in h2 { opacity: 1; transform: none; }
+
+@media (max-width: 860px) {
+  /* One column: title and summary, then the pictures, then the detail. */
+  .project { display: flex; flex-direction: column; gap: 0; }
+  .project .text { display: contents; }
+  .project .text > * { order: 3; }
+  .project .text > .label, .project .text > h3, .project .text > .summary { order: 1; }
+  .project .media, .project.flip .media { order: 2; margin: 4px 0 28px; }
+  .project .full { order: 4; margin-top: 36px; }
+  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .wip .text, .wip .media { grid-column: 1 / -1; }
+  .wip .media { max-width: 420px; }
+  .two { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  .about { grid-template-columns: minmax(0, 1fr); }
+  .top nav { gap: 4px 18px; }
+  .top nav a { font-size: 14px; }
+  .book { grid-template-columns: 96px minmax(0, 1fr); gap: 16px; }
+  .roles li { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .titleblock div { grid-template-columns: 6.5em minmax(0, 1fr); }
+  .wip-title img { width: 64px; }
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="#top">Soroush Bayat</a>
+    <nav aria-label="Sections">
+      <a href="#projects">Projects</a>
+      <a href="#in-progress">In progress</a>
+      <a href="#beyond-class">Beyond class</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap">
+
+    <section class="hero">
+      <h1 aria-label="Soroush Bayat"><span class="word" aria-hidden="true"><span class="ch" style="--i:0">S</span><span class="ch" style="--i:1">o</span><span class="ch" style="--i:2">r</span><span class="ch" style="--i:3">o</span><span class="ch" style="--i:4">u</span><span class="ch" style="--i:5">s</span><span class="ch" style="--i:6">h</span></span> <span class="word" aria-hidden="true"><span class="ch" style="--i:8">B</span><span class="ch" style="--i:9">a</span><span class="ch" style="--i:10">y</span><span class="ch" style="--i:11">a</span><span class="ch" style="--i:12">t</span></span></h1>
+      <div class="about">
+        <div class="portrait"><img src="img/headshot.jpg" alt="Portrait of Soroush Bayat" width="400" height="400"></div>
+        <div>
+          <p class="lede">I'm a senior at La Jolla Country Day School in San Diego. I like finding small problems and building something that fixes them.</p>
+          <p class="more">After high school I plan to study biology on a pre-med track.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="block">
+      <div class="section-head"><h2>Projects</h2></div>
+
+      <article class="project" id="pickledock">
+        <div class="text">
+          <h3 class="rv">PickleDock</h3>
+          <p class="summary rv">A 3D-printed dock that clamps onto a sports wheelchair and keeps a spare pickleball within reach.</p>
+          <div class="body rv">
+            <p>In wheelchair pickleball, the same hands push the chair and swing the paddle. A spare ball in your lap rolls off, and pockets are hard to reach while seated. PickleDock gives the ball a fixed home on the frame, one short reach away.</p>
+            <p>It is two printed parts. A C-shaped clamp snaps onto a round frame tube, and a cup slides onto the clamp with a tapered dovetail. Four flexible fingers hold the ball until you pull it out. The clamp comes in four sizes and everything prints without supports. Getting to this version took more than 30 prototypes.</p>
+            <p>In October 2026 I brought it to a session with wheelchair athletes through the Challenged Athletes Foundation in San Diego. The clamps fit the players' chairs and the dock held through real play. The open question is where on the chair it works best, and that is what I am testing now.</p>
+          </div>
+          <dl class="titleblock stagger">
+            <div class="rv"><dt>Timeline</dt><dd>2025 to present</dd></div>
+            <div class="rv"><dt>Tools</dt><dd>CAD, 3D printing in PETG</dd></div>
+            <div class="rv"><dt>Prototypes</dt><dd>More than 30 so far</dd></div>
+            <div class="rv"><dt>Tested with</dt><dd>Wheelchair athletes, Challenged Athletes Foundation</dd></div>
+            <div class="rv"><dt>Funding</dt><dd>$1,000 from the Torrey Explorers Fund</dd></div>
+            <div class="rv"><dt>Status</dt><dd>Version 6. Print files are free to download.</dd></div>
+            <div class="rv"><dt>Next</dt><dd>A back-bar mount for tennis chairs, more clamp sizes, and ready-made docks for players without a printer</dd></div>
+          </dl>
+          <p class="links rv">
+            <a href="https://trypickledock.com">trypickledock.com</a>
+            <a href="https://www.youtube.com/@GetPickleDock">YouTube updates</a>
+          </p>
+        </div>
+        <div class="media">
+          <figure>
+            <div class="plate wipe r45"><img src="img/pickledock-mounted.jpg" alt="A blue PickleDock holding a yellow pickleball, clamped to the frame of a sports wheelchair beside a court" width="1100" height="1375"></div>
+            <figcaption>PickleDock on a sports wheelchair at the October 2026 test session.</figcaption>
+          </figure>
+          <div class="pair stagger" style="margin-top:12px">
+            <figure>
+              <div class="plate wipe r34"><img src="img/pickledock-closeup.jpg" alt="Close view of the dock and ball clamped to a wheelchair frame tube" width="1000" height="1333" loading="lazy"></div>
+              <figcaption>Clamped to the frame tube.</figcaption>
+            </figure>
+            <figure>
+              <div class="plate wipe cut r34"><img src="img/pickledock-render.webp" alt="CAD render of the cup and clamp holding a pickleball on a tube" width="709" height="1100" loading="lazy"></div>
+              <figcaption>CAD render of the cup and clamp.</figcaption>
+            </figure>
+          </div>
+        </div>
+        <div class="full">
+          <div class="steps stagger">
+            <div class="rv">
+              <div class="plate r11"><img src="img/paddle-end.jpg" alt="A blue printed clip holding an orange ball on the end of a ping pong paddle handle" width="768" height="1024" loading="lazy"></div>
+              <p class="when">2025</p>
+              <h4>A clip for a ping pong paddle</h4>
+              <p>The idea started as a ball holder for the paddles at my school's outdoor table.</p>
+            </div>
+            <div class="rv">
+              <div class="plate r11"><img src="img/pickledock-early.jpg" alt="Two early printed prototypes: a ball cage on a ring clamp" width="1200" height="996" loading="lazy"></div>
+              <p class="when">First prints</p>
+              <h4>A ball cage on a screw-on clamp</h4>
+              <p>It held the ball, but it was hard to put on and take off, and tough to print cleanly.</p>
+            </div>
+            <div class="rv">
+              <div class="plate r11"><img src="img/pickledock-v2.jpg" alt="Renders of version 2 showing the cup, the clamp, and the two parts sliding together" width="1000" height="1000" loading="lazy"></div>
+              <p class="when">Version 2</p>
+              <h4>Rebuilt to print without supports</h4>
+              <p>The cup sits flat on the print bed, with thicker fingers and a slide-on dovetail in place of the screw.</p>
+            </div>
+            <div class="rv">
+              <div class="plate r11"><img src="img/pickledock-court.jpg" alt="Soroush sitting in a sports wheelchair on a court during the test session" width="1000" height="1000" loading="lazy"></div>
+              <p class="when">October 2026</p>
+              <h4>On court with athletes</h4>
+              <p>Fit and strength both passed. Placement on the chair is the next thing to solve.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="project flip" id="paddle">
+        <div class="text">
+          <h3 class="rv">Paddle ball holder</h3>
+          <p class="summary rv">A clip on the end of a ping pong paddle that keeps the ball from blowing away.</p>
+          <div class="body rv">
+            <p>My school has an outdoor ping pong table. When people finished playing, they left the ball and paddles on the table. One gust of wind later, someone was chasing the ball across campus.</p>
+            <p>I designed a small printed clip that sits on the end of the paddle handle and holds the ball in place. It also gives you somewhere to keep a spare ball during a game.</p>
+            <p>Most of the prototyping here was about comfort, trying versions to see what felt right in the hand.</p>
+            <p>This is the project that grew into PickleDock. The snap-in cup stayed, got bigger, and moved onto a wheelchair frame.</p>
+          </div>
+          <dl class="titleblock stagger">
+            <div class="rv"><dt>Year</dt><dd>2025</dd></div>
+            <div class="rv"><dt>Tools</dt><dd>CAD, 3D printing</dd></div>
+            <div class="rv"><dt>Problem</dt><dd>Balls left on an outdoor table get blown away</dd></div>
+            <div class="rv"><dt>Prototyping</dt><dd>Testing what feels comfortable to hold</dd></div>
+            <div class="rv"><dt>Led to</dt><dd><a href="#pickledock">PickleDock</a></dd></div>
+          </dl>
+        </div>
+        <div class="media">
+          <div class="pair stagger">
+            <figure>
+              <div class="plate wipe cut r34"><img src="img/paddle-cut-0.webp" alt="A ping pong paddle with the blue clip and a yellow ball on the end of its handle" width="547" height="1100" loading="lazy"></div>
+              <figcaption>The ball rides on the end of the handle.</figcaption>
+            </figure>
+            <figure>
+              <div class="plate wipe cut r34"><img src="img/paddle-cut-1.webp" alt="Close view of the blue clip gripping a ping pong ball" width="1100" height="1067" loading="lazy"></div>
+              <figcaption>Printed fingers grip the ball.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </article>
+
+      <article class="project" id="sand-cast">
+        <div class="text">
+          <h3 class="rv">Aluminum sand cast</h3>
+          <p class="summary rv">A solid aluminum plaque of a beach scene, with a palm tree, clouds, two towels, and a beach ball, taken from a CAD model to poured metal.</p>
+          <div class="body rv">
+            <p>I made this in my Design to Entrepreneurship class, taking one design from the screen all the way to a finished metal part. Most of the problem solving happened in the CAD design.</p>
+          </div>
+          <ol class="howto stagger">
+            <li class="rv">Designed the relief in CAD</li>
+            <li class="rv">Used the design to form a mold in packed sand</li>
+            <li class="rv">Poured molten aluminum into the mold</li>
+            <li class="rv">Sanded and finished the casting by hand</li>
+          </ol>
+          <dl class="titleblock stagger">
+            <div class="rv"><dt>Year</dt><dd>2025/26 school year</dd></div>
+            <div class="rv"><dt>Class</dt><dd>Design to Entrepreneurship</dd></div>
+            <div class="rv"><dt>Process</dt><dd>CAD, sand casting, hand finishing</dd></div>
+            <div class="rv"><dt>Prototyping</dt><dd>Problem solving in the CAD design</dd></div>
+            <div class="rv"><dt>Material</dt><dd>Aluminum</dd></div>
+          </dl>
+        </div>
+        <div class="media">
+          <div class="grid2 stagger">
+            <div class="plate wipe cut r43"><span class="label tag">CAD</span><img src="img/cast-cad-top.webp" alt="Top view of the CAD model: a beach scene with a palm tree, two clouds, a shoreline, two towels, and a beach ball" width="915" height="687" loading="lazy"></div>
+            <div class="plate wipe cut r43"><span class="label tag">Aluminum</span><img src="img/cast-top-cut.webp" alt="Top view of the finished aluminum plaque showing the same beach scene" width="711" height="530" loading="lazy"></div>
+            <div class="plate wipe cut r43"><img src="img/cast-cad-angle.webp" alt="Angled view of the CAD model showing the shapes raised off a flat plate" width="922" height="484" loading="lazy"></div>
+            <div class="plate wipe cut r43"><img src="img/cast-angle-cut.webp" alt="The aluminum plaque seen from a low angle" width="916" height="510" loading="lazy"></div>
+          </div>
+          <figcaption>The design on the left, the metal on the right. The casting still shows the grain of the sand it was poured into.</figcaption>
+        </div>
+      </article>
+
+      <article class="project flip" id="balloon">
+        <div class="text">
+          <h3 class="rv">Weather balloon sensors</h3>
+          <p class="summary rv">The sensor package for a high-altitude balloon, flown as a project for younger students.</p>
+          <div class="body rv">
+            <p>I handled the electronics and the code. The package reads an accelerometer for motion, a temperature probe, and GPS for position, all through an Arduino.</p>
+            <p>I wired the sensors on a breadboard, then wrote the Arduino code that reads each one. It took a lot of code fixes to get there. The balloon flew as planned and the sensor package worked.</p>
+          </div>
+          <dl class="titleblock stagger">
+            <div class="rv"><dt>Year</dt><dd>2026</dd></div>
+            <div class="rv"><dt>Role</dt><dd>Sensor wiring and all of the code</dd></div>
+            <div class="rv"><dt>Hardware</dt><dd>Arduino, 3-axis accelerometer, temperature probe, GPS</dd></div>
+            <div class="rv"><dt>Code</dt><dd>Arduino (C++)</dd></div>
+            <div class="rv"><dt>Prototyping</dt><dd>Many rounds of code fixes</dd></div>
+            <div class="rv"><dt>Result</dt><dd>Flew as planned, and everything worked</dd></div>
+          </dl>
+        </div>
+        <div class="media">
+          <figure>
+            <div class="plate wipe cut r11"><img src="img/balloon-cut.webp" alt="An Arduino wired to a breadboard, an accelerometer board, and a temperature probe" width="864" height="1200" loading="lazy"></div>
+            <figcaption>Arduino, breadboard, accelerometer, and temperature probe.</figcaption>
+          </figure>
+        </div>
+      </article>
+    </section>
+
+    <!-- IN PROGRESS -->
+    <section id="in-progress" class="block">
+      <div class="section-head"><h2>In progress</h2></div>
+      <div class="wip">
+        <div class="text">
+          <p class="status rv">In development</p>
+          <div class="wip-title rv">
+            <img src="img/wayfinder-logo.png" alt="Campus Wayfinder logo: a tree and a winding path inside a blue map pin" width="436" height="520" loading="lazy">
+            <h3>Campus Wayfinder</h3>
+          </div>
+          <div class="rv">
+            <p>A phone app that helps parents, students, and visitors find their way around the La Jolla Country Day School campus. You search for a room, a subject, or a sport and get walking directions with live GPS.</p>
+            <p>A step-free mode plans a separate route for wheelchair users and leaves out every path with stairs. The app opens from a QR code at the entrance, so there is nothing to download.</p>
+            <p>I built a first version in a no-code tool and I am now rebuilding it in code. I also designed the logo.</p>
+          </div>
+        </div>
+        <figure class="media rv" style="--d:120ms">
+          <div class="shot"><img src="img/wayfinder-screen.webp" alt="Campus Wayfinder search screen: the logo and name in a blue header, a search box, a step-free route toggle, a Use my location button, and a starting point menu" width="1198" height="949" loading="lazy"></div>
+          <figcaption>The new look for the search screen.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- BEYOND CLASS -->
+    <section id="beyond-class" class="block">
+      <div class="section-head"><h2>Beyond class</h2></div>
+      <div class="two">
+        <div class="rv">
+          <p class="kicker">A book I wrote</p>
+          <div class="book">
+            <img src="img/book-cover.jpg" alt="Cover of Conversations That Last by Soroush Bayat" width="900" height="1391" loading="lazy">
+            <div>
+              <h3>Conversations That Last</h3>
+              <p>What people in their 80s and 90s know about living well. Sixty real quotes chosen from several hundred conversations, arranged in six chapters.</p>
+              <p class="note">Self-published through Amazon KDP.</p>
+            </div>
+          </div>
+        </div>
+        <div class="rv" style="--d:100ms">
+          <p class="kicker">Research I co-authored</p>
+          <p style="margin-top:14px">Four peer-reviewed papers, written with researchers at Shahid Beheshti University of Medical Sciences and the University of Louisville. Two of them:</p>
+          <ul class="cites">
+            <li><a href="https://doi.org/10.1007/s10103-025-04559-9">In vitro photobiomodulation enhances human adipose-derived stem cell viability and exosome quality</a><span class="j">Lasers in Medical Science, 2025</span></li>
+            <li><a href="https://doi.org/10.1007/s00238-025-02384-5">Targeting oxidative stress in diabetic wound repair: combined photobiomodulation and adipose-derived stem cell therapy</a><span class="j">European Journal of Plastic Surgery, 2026</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="also">
+        <p class="kicker rv">Clubs and volunteering</p>
+        <ul class="roles stagger">
+          <li class="rv"><span>Schoolhouse.world</span><span>Volunteer SAT tutor, selected for senior tutor training</span></li>
+          <li class="rv"><span>Persian Club</span><span>Co-leader</span></li>
+          <li class="rv"><span>Peer Leader</span><span>La Jolla Country Day School</span></li>
+        </ul>
+      </div>
+    </section>
+
+  </div>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <p class="kicker">Get in touch</p>
+      <a class="big" href="mailto:sbayat2027@ljcds.org">sbayat2027@ljcds.org</a>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  if (!('IntersectionObserver' in window)) return;
+
+  // Highlight exactly one section in the top bar: the last one whose top has passed
+  // the upper part of the screen, or the final one once the page is scrolled to the end.
+  var links = {}, ids = [];
+  document.querySelectorAll('.top nav a').forEach(function (a) {
+    var id = a.getAttribute('href').slice(1);
+    if (document.getElementById(id)) { links[id] = a; ids.push(id); }
+  });
+  var ticking = false;
+  function spy() {
+    ticking = false;
+    var line = window.innerHeight * 0.4, cur = null;
+    ids.forEach(function (id) {
+      if (document.getElementById(id).getBoundingClientRect().top <= line) cur = id;
+    });
+    var doc = document.documentElement;
+    if (cur && window.innerHeight + window.pageYOffset >= doc.scrollHeight - 4) cur = ids[ids.length - 1];
+    ids.forEach(function (id) { links[id].classList.toggle('on', id === cur); });
+  }
+  function queue() { if (!ticking) { ticking = true; requestAnimationFrame(spy); } }
+  window.addEventListener('scroll', queue, { passive: true });
+  window.addEventListener('resize', queue);
+  window.addEventListener('load', spy);
+  spy();
+
+  if (!root.classList.contains('js')) return;
+
+  // Stagger siblings inside a group.
+  document.querySelectorAll('.stagger').forEach(function (group) {
+    var i = 0;
+    group.querySelectorAll('.rv, .wipe').forEach(function (el) { el.style.setProperty('--d', (i++ * 70) + 'ms'); });
+  });
+
+  // Reveal on scroll. Anything already scrolled past is shown at once.
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting || e.boundingClientRect.bottom < 0) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+  document.querySelectorAll('.rv, .wipe, .section-head').forEach(function (el) { io.observe(el); });
+
+  // If the page is printed or the tab was restored oddly, never leave content hidden.
+  window.addEventListener('beforeprint', function () {
+    document.querySelectorAll('.rv, .wipe, .section-head').forEach(function (el) { el.classList.add('in'); });
+  });
+})();
+</script>
+</body>
+</html>
